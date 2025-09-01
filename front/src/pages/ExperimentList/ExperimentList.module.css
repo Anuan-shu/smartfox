@@ -1,0 +1,421 @@
+/* 引用白蓝主题变量 */
+:root {
+  --primary: #1890FF; /* 主蓝色 */
+  --primary-hover: #40A9FF; /* 悬停蓝色 */
+  --primary-active: #096DD9; /* 激活蓝色 */
+  --primary-light: #E6F3FF; /* 浅蓝色 */
+  --primary-lighter: #F0F8FF; /* 更浅蓝色 */
+  --success: #52C41A; /* 成功绿色 */
+  --warning: #FAAD14; /* 警告橙色 */
+  --error: #FF4D4F; /* 错误红色 */
+  --text: #2C3E50; /* 主文本颜色 */
+  --text-secondary: #595959; /* 次要文本 */
+  --text-disabled: #BFBFBF; /* 禁用文本 */
+  --bg-primary: #FFFFFF; /* 白色背景 */
+  --bg-secondary: #F0F8FF; /* 浅蓝色背景 */
+  --bg-gradient: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%); /* 渐变背景 */
+  --bg-disabled: #F5F5F5; /* 禁用背景 */
+  --border: #D9D9D9; /* 默认边框 */
+  --border-primary: #1890FF; /* 蓝色边框 */
+  --border-split: #E6F3FF; /* 浅蓝色分割线 */
+  --shadow-sm: 0 2px 8px rgba(24, 144, 255, 0.1);
+  --shadow-md: 0 4px 12px rgba(24, 144, 255, 0.15);
+  --shadow-lg: 0 6px 16px rgba(24, 144, 255, 0.2);
+  --radius-base: 6px;
+  --radius-lg: 8px;
+}
+
+.container {
+  display: flex; /* 水平布局：侧边栏 + 主内容 */
+  width: 100%; /* 全屏宽度 */
+  min-height: calc(100vh - 64px);
+  background: var(--bg-gradient); /* 浅蓝色渐变背景 */
+}
+
+.sidebar {
+  width: 300px; /* 固定侧边栏宽度 */
+  padding: 1rem;
+  background: var(--bg-primary); /* 白色背景 */
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-right: 1rem; /* 与主内容间距 */
+}
+
+.mainContent {
+  flex: 1; /* 占据剩余宽度 */
+  padding: 1rem 0.5rem; /* 最小化内边距 */
+}
+
+.header {
+  display: flex;
+  flex-direction: column; /* 垂直排列标题和按钮 */
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg); /* 8px 圆角 */
+}
+
+.header h1 {
+  color: var(--text); /* 深色文字 */
+  font-size: 1.5rem; /* 缩小标题以适应侧边栏 */
+  font-weight: 600;
+  margin: 0;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%); /* 蓝色渐变文字 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.createButton {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%); /* 蓝色渐变 */
+  color: var(--bg-primary); /* 白色文字 */
+  padding: 0.5rem 1rem; /* 缩小按钮 */
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.createButton:hover {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-active) 100%); /* 悬停渐变 */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+  color: var(--bg-primary);
+}
+
+.createButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.3); /* 蓝色光晕 */
+}
+
+.filters {
+  display: flex;
+  gap: 0.5rem; /* 减小间距 */
+  padding: 0.5rem; /* 缩小内边距 */
+  border-radius: var(--radius-lg); /* 8px 圆角 */
+  overflow-x: auto; /* 水平滚动 */
+  white-space: nowrap; /* 确保按钮不换行 */
+}
+
+.filters button {
+  padding: 0.4rem 1rem; /* 缩小按钮 */
+  border: 2px solid var(--border); /* 默认边框 */
+  background: var(--bg-primary); /* 白色背景 */
+  color: var(--text-secondary); /* 次要文本颜色 */
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem; /* 缩小字体 */
+  transition: all 0.2s ease;
+}
+
+.filters button:hover {
+  border-color: var(--border-primary); /* 蓝色边框 */
+  color: var(--primary); /* 蓝色文字 */
+}
+
+.filters button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.3); /* 蓝色光晕 */
+}
+
+.activeFilter {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%) !important; /* 蓝色渐变 */
+  color: var(--bg-primary) !important; /* 白色文字 */
+  border-color: transparent !important;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* 铺满右侧 */
+  gap: 2.5rem;
+  margin: 2rem 0.5rem;
+}
+
+.card {
+  background: var(--bg-primary); /* 白色背景 */
+  border-radius: var(--radius-lg); /* 8px 圆角 */
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+  border: 1px solid var(--border); /* 默认边框 */
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%); /* 蓝色渐变 */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg); /* 更大阴影 */
+}
+
+.card:hover::before {
+  transform: scaleX(1.1); /* 悬停时顶部条轻微放大 */
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card h3 {
+  color: var(--text); /* 深色文字 */
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+.card p {
+  color: var(--text-secondary); /* 次要文本颜色 */
+  line-height: 1.6;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-split); /* 浅蓝色分割线 */
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.editButton {
+  background: var(--success) !important; /* 绿色背景 */
+  border-color: var(--success) !important;
+}
+
+.editButton:hover {
+  background: #73D13D !important; /* 更亮的绿色 */
+  border-color: #73D13D !important;
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+}
+
+.editButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(82, 196, 26, 0.3); /* 绿色光晕 */
+}
+
+.button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%); /* 蓝色渐变 */
+  color: var(--bg-primary); /* 白色文字 */
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  width: auto;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-active) 100%); /* 悬停渐变 */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+  color: var(--bg-primary);
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.3); /* 蓝色光晕 */
+}
+
+.active {
+  background: linear-gradient(135deg, var(--success) 0%, #73D13D 100%); /* 绿色渐变 */
+  color: var(--bg-primary); /* 白色文字 */
+  padding: 4px 12px;
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.expired {
+  background: linear-gradient(135deg, var(--error) 0%, #FF7875 100%); /* 红色渐变 */
+  color: var(--bg-primary); /* 白色文字 */
+  padding: 4px 12px;
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.notStarted {
+  background: linear-gradient(135deg, var(--warning) 0%, #FFC53D 100%); /* 橙色渐变 */
+  color: var(--bg-primary); /* 白色文字 */
+  padding: 4px 12px;
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0.5rem;
+  padding: 1.5rem 3rem;
+  background: var(--bg-primary); /* 白色背景 */
+  border-radius: var(--radius-lg); /* 8px 圆角 */
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+  min-height: 80px;
+  width: calc(100% - 1rem); /* 铺满右侧 */
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column; /* 侧边栏移到顶部 */
+  }
+
+  .sidebar {
+    width: 100%; /* 全宽 */
+    margin-right: 0;
+    padding: 0.5rem;
+  }
+
+  .mainContent {
+    padding: 0.5rem;
+  }
+
+  .header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .filters {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .filters button {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 1rem 0;
+  }
+
+  .card {
+    padding: 1.5rem 2rem;
+  }
+
+  .pagination {
+    padding: 1rem 2rem;
+    margin: 2rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 0.5rem;
+  }
+
+  .header {
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+
+  .filters {
+    flex-direction: column; /* 按钮垂直排列 */
+    align-items: flex-start;
+    padding: 0.5rem;
+    overflow-x: visible;
+    white-space: normal;
+  }
+
+  .filters button {
+    width: 100%; /* 按钮全宽 */
+    text-align: left;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .pagination {
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr; /* 单列布局 */
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1rem 1.5rem;
+  }
+
+  .createButton,
+  .button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .header h1 {
+    font-size: 1.1rem;
+  }
+
+  .filters {
+    padding: 0.5rem;
+  }
+
+  .filters button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .pagination {
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+  }
+}

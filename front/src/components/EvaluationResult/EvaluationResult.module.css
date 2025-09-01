@@ -1,0 +1,143 @@
+.container {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    background-color: var(--code-bg);
+  }
+  
+  .title {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+  
+  .summary {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .statusBadge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .success {
+    background-color: rgba(0, 200, 83, 0.1);
+    color: #00c853;
+  }
+  
+  .fail {
+    background-color: rgba(255, 45, 85, 0.1);
+    color: #ff2d55;
+  }
+  
+  .score {
+    font-size: 1.1rem;
+  }
+  
+  .score span {
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  
+  .detailSection {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .detailItem {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+  
+  .detailLabel {
+    color: #888;
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+  }
+  
+  .errorSection {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+  }
+  
+  .errorTitle {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #ff2d55;
+  }
+  
+  .errorMessage {
+    background-color: rgba(255, 45, 85, 0.05);
+    padding: 1rem;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #ff2d55;
+    margin: 0;
+    overflow-x: auto;
+  }
+  
+  .testCases {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+  }
+  
+  .testCases h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .testCase {
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid;
+  }
+  
+  .casePassed {
+    border-color: rgba(0, 200, 83, 0.3);
+    background-color: rgba(0, 200, 83, 0.05);
+  }
+  
+  .caseFailed {
+    border-color: rgba(255, 45, 85, 0.3);
+    background-color: rgba(255, 45, 85, 0.05);
+  }
+  
+  .caseHeader {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .caseDetail {
+    font-family: monospace;
+    font-size: 0.85rem;
+  }
+  
+  .caseDetail div {
+    margin-bottom: 0.25rem;
+  }
+  
+  code {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: monospace;
+  }

@@ -1,0 +1,207 @@
+/* 白蓝主题配色 */
+.container {
+  width: 1400px; /* 固定宽度 */
+  margin: 0 auto;
+  padding: 24px;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  min-height: calc(100vh - 64px);
+  box-shadow: 0 0 20px rgba(24, 144, 255, 0.1); /* 添加柔和阴影 */
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.header {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 20px 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #1890ff; 
+  gap: 12px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #1890ff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form {
+  width: 100%; /* 继承容器宽度 */
+  max-width: 100%; /* 确保不超出容器 */
+  background: white;
+  padding: 32px; /* 增加内边距 */
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin: 0 auto; /* 水平居中 */
+}
+
+.questionsSection {
+  margin-top: 24px;
+}
+
+.addQuestionButtons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.addQuestionButtons .ant-btn {
+  border-color: #1890ff;
+  color: #1890ff;
+  transition: all 0.3s ease;
+}
+
+.addQuestionButtons .ant-btn:hover {
+  background: #1890ff;
+  color: white;
+  border-color: #1890ff;
+}
+
+.questionCard {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  border: 1px solid #e6f3ff;
+  transition: all 0.3s ease;
+}
+
+.questionCard:hover {
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.1);
+  border-color: #1890ff;
+}
+
+.questionCard .ant-card-head {
+  background: linear-gradient(90deg, #f0f8ff 0%, #ffffff 100%);
+  border-bottom: 1px solid #e6f3ff;
+}
+
+.questionCard .ant-card-head-title {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+/* 表单项样式 */
+.form .ant-form-item-label > label {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+.form .ant-input,
+.form .ant-input-number,
+.form .ant-select-selector,
+.form .ant-picker {
+  border-color: #d9d9d9;
+  transition: all 0.3s ease;
+}
+
+.form .ant-input:focus,
+.form .ant-input-number:focus,
+.form .ant-select-focused .ant-select-selector,
+.form .ant-picker:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* 按钮样式 */
+.form .ant-btn-primary {
+  background: #1890ff;
+  border-color: #1890ff;
+  transition: all 0.3s ease;
+}
+
+.form .ant-btn-primary:hover {
+  background: #40a9ff;
+  border-color: #40a9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+.form .ant-btn-danger {
+  transition: all 0.3s ease;
+}
+
+.form .ant-btn-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+/* 测试用例卡片 */
+.questionCard .ant-card-small {
+  background: #f8fbff;
+  border: 1px solid #e6f3ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .addQuestionButtons {
+    flex-direction: column;
+  }
+  
+  .addQuestionButtons .ant-btn {
+    width: 100%;
+  }
+  
+  .form {
+    padding: 16px;
+  }
+}
+
+/* 分割线样式 */
+.form .ant-divider {
+  border-color: #e6f3ff;
+  color: #1890ff;
+  font-weight: 600;
+}
+
+/* 选择框样式 */
+.form .ant-select-multiple .ant-select-selection-item {
+  background: #e6f3ff;
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+/* 输入框组样式 */
+.form .ant-input-group .ant-input {
+  border-color: #d9d9d9;
+}
+
+.form .ant-input-group .ant-input:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* 卡片标题样式 */
+.questionCard .ant-card-extra .ant-btn {
+  color: #ff4d4f;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.questionCard .ant-card-extra .ant-btn:hover {
+  background: #fff2f0;
+  color: #ff4d4f;
+}

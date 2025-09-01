@@ -1,0 +1,119 @@
+.container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 2rem;
+  background: #f0f2f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.profileCard {
+  width: 100%;
+  max-width: 1200px; /* 最大宽度限制 */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-height: calc(100vh - 4rem);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  
+  .profileCard {
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+}
+
+/* 内容区域优化 */
+.cardContent {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+@media (max-width: 992px) {
+  .cardContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .avatarSection {
+    margin-bottom: 2rem;
+  }
+}
+
+/* 其他原有样式保持不变... */
+
+/* 其他样式保持不变... */
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e8e8e8;
+}
+
+.uploadButton {
+  margin-top: 8px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.uploadButton:hover {
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.form {
+  width: 100%;
+  margin: auto;
+  max-width: 600px;
+}
+
+.input {
+  border-radius: 4px;
+  padding: 0.8rem;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+}
+
+.divider {
+  margin: 24px 0;
+  border-color: #e8e8e8;
+  font-size: 16px;
+  font-weight: 500;
+  color: #595959;
+}
+
+.submitButton {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #40a9ff;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}

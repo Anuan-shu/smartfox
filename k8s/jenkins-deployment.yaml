@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins-sa # 使用上面创建的 ServiceAccount
+      containers:
+        - name: jenkins
+          # 使用包含了 Docker 客户端和 kubectl 的 Jenkins 镜像
+          image: jenkins/jenkins:lts-jdk11
+          ports:
+            - containerPort: 8080 # Jenkins Web UI 端口
+            - containerPort: 50000 # Agent 连接端口
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8081
+      targetPort: 8080
+      name: http
+    - port: 50000
+      targetPort: 50000
+      name: agent
+  selector:
+    app: jenkins

@@ -1,0 +1,14 @@
+# Git 版本控制目录
+.git
+
+# IDE 配置文件
+.idea
+.vscode
+.DS_Store
+
+# GoLand/VSCode 的代码计数器或项目文件
+.VSCodeCounter
+*.iml
+
+# Markdown 文档
+*.md

@@ -1,0 +1,96 @@
+{
+  "name": "smart-fox",
+  "version": "6.6.6",
+  "private": true,
+  "proxy": "http://127.0.0.1:3002",
+  "dependencies": {
+    "@ant-design/icons": "^6.0.0",
+    "@monaco-editor/react": "^4.7.0",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@testing-library/dom": "^10.4.0",
+    "antd": "^5.25.1",
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "monaco-editor": "^0.52.2",
+    "monaco-editor-webpack-plugin": "^7.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.6.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4",
+    "zustand": "^5.0.3"
+  },
+  "scripts": {
+    "start": "webpack serve --config ./webpack.config.js --mode development",
+    "test:cypress": "cypress open",
+    "build": "react-scripts build",
+    "test": "mocha test/**/*.test.js --require src/test/setup.js --timeout 10000",
+    "test:watch": "mocha test/**/*.test.js --require src/test/setup.js --watch --timeout 10000",
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:storybook/recommended"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
+    "@storybook/addon-onboarding": "^8.6.12",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/preset-create-react-app": "^8.6.12",
+    "@storybook/react": "^8.6.12",
+    "@storybook/react-webpack5": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "babel-jest": "^30.0.5",
+    "chai": "^6.0.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "cypress": "^14.0.0",
+    "eslint-plugin-storybook": "^0.12.0",
+    "html-webpack-plugin": "^5.6.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^26.1.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^11.7.1",
+    "prop-types": "^15.8.1",
+    "sinon": "^21.0.0",
+    "sinon-chai": "^4.0.1",
+    "storybook": "^8.6.12",
+    "webpack": "^5.99.8",
+    "webpack-cli": "^6.0.1"
+  }
+}

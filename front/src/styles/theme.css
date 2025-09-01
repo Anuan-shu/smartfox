@@ -1,0 +1,54 @@
+/* 白蓝主题色彩变量 */
+:root {
+  /* 主色调 */
+  --primary: #1890FF; /* 主蓝色 */
+  --primary-hover: #40A9FF; /* 悬停蓝色 */
+  --primary-active: #096DD9; /* 激活蓝色 */
+  --primary-light: #E6F3FF; /* 浅蓝色 */
+  --primary-lighter: #F0F8FF; /* 更浅蓝色 */
+
+  /* 状态颜色 */
+  --success: #52C41A; /* 成功绿色 */
+  --warning: #FAAD14; /* 警告橙色 */
+  --error: #FF4D4F; /* 错误红色 */
+
+  /* 文本颜色 */
+  --text: #2C3E50; /* 主文本颜色（替换原 --text-primary） */
+  --text-secondary: #595959; /* 次要文本 */
+  --text-disabled: #BFBFBF; /* 禁用文本 */
+
+  /* 背景颜色 */
+  --bg-primary: #FFFFFF; /* 白色背景 */
+  --bg-secondary: #F0F8FF; /* 浅蓝色背景 */
+  --bg-gradient: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%); /* 渐变背景 */
+  --bg-disabled: #F5F5F5; /* 禁用背景 */
+
+  /* 边框颜色 */
+  --border: #D9D9D9; /* 默认边框 */
+  --border-primary: #1890FF; /* 蓝色边框 */
+  --border-split: #E6F3FF; /* 浅蓝色分割线 */
+
+  /* 阴影效果 */
+  --shadow-sm: 0 2px 8px rgba(24, 144, 255, 0.1);
+  --shadow-md: 0 4px 12px rgba(24, 144, 255, 0.15);
+  --shadow-lg: 0 6px 16px rgba(24, 144, 255, 0.2);
+
+  /* 圆角 */
+  --radius-base: 6px;
+  --radius-lg: 8px;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1A2634; /* 深色背景 */
+    --bg-secondary: #2F3B4C; /* 深色次背景 */
+    --bg-gradient: linear-gradient(135deg, #2F3B4C 0%, #1A2634 100%); /* 深色渐变 */
+    --text: #E6F3FF; /* 浅色文本 */
+    --text-secondary: #A3BFFA; /* 次要浅色文本 */
+    --text-disabled: #6B7280; /* 禁用文本 */
+    --bg-disabled: #374151; /* 禁用背景 */
+    --border: #4B5EAA; /* 深色边框 */
+    --border-split: #2F3B4C; /* 深色分割线 */
+  }
+}

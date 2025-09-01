@@ -1,0 +1,141 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 64px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%); /* 使用蓝色渐变 */
+  box-shadow: var(--shadow-sm); /* 使用小阴影变量 */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logoText {
+  color: var(--bg-primary); /* 白色文字 */
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease;
+}
+
+.logoText:hover {
+  transform: scale(1.05);
+  color: var(--bg-primary);
+}
+
+.navContent {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: space-between;
+  margin-left: 2rem;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navLink {
+  color: var(--primary-lighter); /* 更浅蓝色文字 */
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-base); /* 使用基础圆角变量 */
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.navLink:hover {
+  color: var(--bg-primary); /* 白色文字 */
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.navLink.active {
+  color: var(--bg-primary);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userRole {
+  color: var(--primary-lighter); /* 更浅蓝色文字 */
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--bg-primary);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: var(--radius-base);
+  transition: background 0.2s ease;
+}
+
+.userInfo:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.username {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.authButtons {
+  display: flex;
+  gap: 12px;
+}
+
+/* 登录/注册按钮样式 */
+.authButton {
+  padding: 8px 16px;
+  border-radius: var(--radius-base);
+  font-weight: 500;
+  color: var(--bg-primary);
+  transition: all 0.2s ease;
+}
+
+.loginButton {
+  color: var(--bg-primary);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.loginButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.registerButton {
+  color: var(--primary);
+  background: var(--bg-primary);
+}
+
+.registerButton:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}

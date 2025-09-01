@@ -1,0 +1,194 @@
+/* 白蓝主题 - 宽屏固定宽度版 */
+.container {
+  width: 1600px; /* 固定宽度 */
+  max-width: 95%; /* 最大不超过屏幕95% */
+  margin: 0 auto;
+  padding: 3rem;
+  min-height: calc(100vh - 64px);
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  box-shadow: 0 0 30px rgba(24, 144, 255, 0.1);
+}
+
+.container h1 {
+  color: #1890ff;
+  font-size: 2.8rem; /* 放大标题 */
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.previewCard {
+  position: relative;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background: #fff;
+}
+
+.filePreview {
+  display: flex;
+  align-items: center;
+}
+
+.previewIcon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.fileName {
+  flex: 1;
+  word-break: break-word;
+}
+
+.fileActions {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+.form {
+  width: 100%; /* 继承容器宽度 */
+  background: white;
+  padding: 4rem; /* 增加内边距 */
+  border-radius: 20px; /* 更大圆角 */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  margin: 0 auto;
+}
+
+.questionsSection {
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.addQuestionButtons {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  border: 3px dashed #dee2e6;
+  width: 100%;
+}
+
+.addQuestionButtons button {
+  min-width: 200px; /* 固定按钮最小宽度 */
+  background: white;
+  border: 2px solid #1890ff;
+  color: #1890ff;
+  padding: 1.2rem 2.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(24, 144, 255, 0.15);
+}
+
+.addQuestionButtons button:hover {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(24, 144, 255, 0.3);
+}
+
+.questionCard {
+  width: 100%; /* 继承父容器宽度 */
+  margin-bottom: 3rem;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+}
+
+.questionCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
+}
+
+.questionCard .ant-card-head {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  border-bottom: none;
+  padding: 0 2rem;
+}
+
+.questionCard .ant-card-head-title {
+  color: white;
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding: 1.5rem 0;
+}
+
+.questionCard .ant-card-extra button {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+}
+
+.questionCard .ant-card-extra button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 1700px) {
+  .container {
+    width: 1400px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .container {
+    width: 1200px;
+    padding: 2.5rem;
+  }
+  
+  .form {
+    padding: 3.5rem;
+  }
+}
+
+@media (max-width: 1300px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 2rem;
+  }
+  
+  .form {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+  
+  .container h1 {
+    font-size: 2.2rem;
+  }
+  
+  .form {
+    padding: 2rem;
+    backdrop-filter: none;
+  }
+  
+  .addQuestionButtons {
+    padding: 1.5rem;
+  }
+  
+  .questionCard .ant-card-head {
+    padding: 0 1.5rem;
+  }
+}

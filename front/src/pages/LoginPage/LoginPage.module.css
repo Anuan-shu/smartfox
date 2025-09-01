@@ -1,0 +1,135 @@
+/* 引用白蓝主题变量 */
+:root {
+  --primary: #1890FF; /* 主蓝色 */
+  --primary-hover: #40A9FF; /* 悬停蓝色 */
+  --primary-active: #096DD9; /* 激活蓝色 */
+  --primary-light: #E6F3FF; /* 浅蓝色 */
+  --primary-lighter: #F0F8FF; /* 更浅蓝色 */
+  --text: #2C3E50; /* 主文本颜色 */
+  --text-disabled: #BFBFBF; /* 禁用文本 */
+  --bg-primary: #FFFFFF; /* 白色背景 */
+  --bg-secondary: #F0F8FF; /* 浅蓝色背景 */
+  --bg-gradient: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%); /* 渐变背景 */
+  --bg-disabled: #F5F5F5; /* 禁用背景 */
+  --border: #D9D9D9; /* 默认边框 */
+  --border-primary: #1890FF; /* 蓝色边框 */
+  --shadow-sm: 0 2px 8px rgba(24, 144, 255, 0.1);
+  --shadow-md: 0 4px 12px rgba(24, 144, 255, 0.15);
+  --radius-base: 6px;
+  --radius-lg: 8px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  background: var(--bg-gradient); /* 浅蓝色渐变背景 */
+  padding: 2rem;
+}
+
+.form {
+  background: var(--bg-primary); /* 白色背景 */
+  padding: 3rem;
+  border-radius: var(--radius-lg); /* 8px 圆角 */
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+  border: 1px solid var(--border); /* 默认边框 */
+  backdrop-filter: blur(10px); /* 保留毛玻璃效果 */
+}
+
+.form h2 {
+  color: var(--text); /* 深色文字 */
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%); /* 蓝色渐变文字 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form input {
+  width: 100%;
+  padding: 1rem;
+  background: var(--bg-secondary); /* 浅蓝色背景 */
+  border: 2px solid var(--border); /* 默认边框 */
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  color: var(--text); /* 深色文字 */
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: var(--border-primary); /* 蓝色边框 */
+  background: var(--bg-primary); /* 白色背景 */
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1); /* 蓝色光晕 */
+}
+
+.form input:disabled {
+  background: var(--bg-disabled); /* 禁用背景 */
+  cursor: not-allowed;
+  opacity: 0.7;
+  color: var(--text-disabled); /* 禁用文本颜色 */
+}
+
+.form button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-active) 100%); /* 蓝色渐变 */
+  color: var(--bg-primary); /* 白色文字 */
+  padding: 1rem;
+  border: none;
+  border-radius: var(--radius-base); /* 6px 圆角 */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.form button:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary-active) 100%); /* 悬停渐变 */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md); /* 中等阴影 */
+}
+
+.form button:disabled {
+  background: var(--bg-disabled); /* 禁用背景 */
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  color: var(--text-disabled); /* 禁用文本颜色 */
+}
+
+.form button:active {
+  transform: translateY(0);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .form {
+    padding: 2rem;
+    max-width: 100%;
+  }
+
+  .form h2 {
+    font-size: 1.5rem;
+  }
+
+  .form input,
+  .form button {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}

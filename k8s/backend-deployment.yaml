@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: anuanshu/smart-backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3002
+        env:
+        - name: MYSQL_HOST
+          value: "mysql-db" # 使用数据库 Service 的名称
+        - name: JUDGE_URL
+          value: "http://judge:8080" # 使用评测服务 Service 的名称
+        - name: MYSQL_USER
+          value: "root"
+        - name: MYSQL_DB
+          value: "rg"
+        - name: GIN_MODE
+          value: "release"
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+  - port: 3002
+    targetPort: 3002
+  type: LoadBalancer # 自动将服务暴露在 localhost:3002
