@@ -1,0 +1,122 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置Go环境
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24' # 建议使用您的项目所用的Go版本
+
+      - name: 下载后端依赖 (Go Modules)
+        working-directory: ./smart_fox2 # 假设您的 go.mod 文件在 backend 目录下
+        run: go mod download
+
+      - name: 构建后端 (Go Gin)
+        working-directory: ./smart_fox2
+        run: |
+          # 使用 CGO_ENABLED=0 进行静态编译，可以减少对系统库的依赖，使镜像更小、更具可移植性
+          CGO_ENABLED=0 GOOS=linux go build -v -o myapp .
+
+      - name: 设置Node.js环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      
+      - name: 安装并构建前端
+        working-directory: ./front
+        run: |
+          npm ci
+          npm run build
+
+      - name: 卸载现有应用
+        run: |
+          echo "卸载现有Todo应用..."
+          kubectl delete namespace todo-app --ignore-not-found=true || true
+          echo "等待命名空间删除完成..."
+          # 等待命名空间完全删除，避免资源冲突
+          kubectl wait --for=delete namespace/todo-app --timeout=2m 2>/dev/null || true
+          echo "卸载完成，开始重新部署..."
+
+      - name: 构建并推送Docker镜像
+        run: |
+          # 登录到您的镜像仓库 (可选，如果是本地的 self-hosted runner 且不需要推送到远程仓库，可以跳过)
+          # echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+          # 构建后端镜像
+          # 注意：这里的 --load 是为了在 buildx 中直接将镜像加载到本地 docker images，如果您的 runner 环境不同，可能需要调整
+          docker build -t todo-backend:latest -f smart_fox2/Dockerfile ./smart_fox2 --load
+          docker build -t todo-frontend:latest -f front/Dockerfile ./front --load
+          docker build -t todo-judge:latest -f smart_fox2/Judger/Dockerfile ./smart_fox2/Judger --load
+
+          # (可选) 如果需要推送到远程仓库
+          # docker push your-repo/todo-backend:latest
+
+          # 数据库镜像通常直接使用官方镜像，无需本地构建
+
+      - name: 部署到Kubernetes
+        run: |
+          # 创建命名空间
+          kubectl apply -f k8s/namespace.yaml
+
+          # 部署MySQL (假设您仍在使用MySQL)
+          kubectl apply -f k8s/mysql-secret.yaml
+          kubectl apply -f k8s/mysql-pvc.yaml
+          kubectl apply -f k8s/mysql-deployment.yaml
+
+          # 等待MySQL就绪
+          echo "等待MySQL Pod就绪..."
+          kubectl wait --for=condition=ready pod -l app=todo-database -n todo-app --timeout=5m
+
+          # 部署后端 (Gin)
+          kubectl apply -f k8s/backend-deployment.yaml
+
+          # 部署前端 (如果前端是独立部署的话)
+          kubectl apply -f k8s/frontend-deployment.yaml
+          kubectl apply -f k8s/judge-deployment.yaml
+
+          # 等待服务就绪
+          echo "等待后端Pod就绪..."
+          kubectl wait --for=condition=ready pod -l app=todo-backend -n todo-app --timeout=3m
+          # echo "等待前端Pod就绪..."
+          kubectl wait --for=condition=ready pod -l app=todo-frontend -n todo-app --timeout=3m
+
+      - name: 验证部署状态
+        run: |
+          echo "部署完成！查看服务状态："
+          kubectl get all -n todo-app
+
+          echo "查看Pod状态："
+          kubectl get pods -n todo-app
+
+          echo "查看服务端口："
+          kubectl get svc -n todo-app
+
+      - name: 部署成功通知
+        if: success()
+        run: |
+          echo "✅ Todo应用部署成功！"
+          echo "🌐 访问地址 (示例): http://<your-node-ip>:3000"
+          echo "📊 查看状态: kubectl get all -n todo-app"
+
+      - name: 部署失败通知
+        if: failure()
+        run: |
+          echo "❌ Todo应用部署失败！"
+          echo "请检查CI/CD流水线的日志以及Kubernetes Pod的日志。"
+          echo "📋 查看后端日志: kubectl logs -f deployment/todo-backend -n todo-app"
+          echo "🔍 查看Pod详情: kubectl describe pods -l app=todo-backend -n todo-app"
