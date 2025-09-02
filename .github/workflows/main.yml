@@ -45,7 +45,7 @@ jobs:
         working-directory: ./front
         run: |
           npm ci
-          npm run build
+          CI=false npm run build
 
       - name: 卸载现有应用
         run: |
