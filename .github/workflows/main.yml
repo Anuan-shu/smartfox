@@ -11,7 +11,10 @@ jobs:
     permissions:
       contents: read
       packages: write
-
+    defaults:
+      run:
+        # 使用您服务器上 Git Bash 的确切路径
+        shell: F:\git\Git\bin\bash.exe -e -o pipefail {0}
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
@@ -50,7 +53,6 @@ jobs:
           npm run build
 
       - name: 卸载现有应用
-
         run: |
           echo "卸载现有Todo应用..."
    
