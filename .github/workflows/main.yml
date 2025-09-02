@@ -43,9 +43,11 @@ jobs:
       
       - name: 安装并构建前端
         working-directory: ./front
+        env:
+          CI: false
         run: |
           npm ci
-          CI=false npm run build
+          npm run build
 
       - name: 卸载现有应用
         run: |
