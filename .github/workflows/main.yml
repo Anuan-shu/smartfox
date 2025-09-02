@@ -39,6 +39,7 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: front/package-lock.json
       
       - name: 安装并构建前端
         working-directory: ./front
