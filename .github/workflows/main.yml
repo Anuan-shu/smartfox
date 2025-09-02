@@ -29,9 +29,10 @@ jobs:
 
       - name: 构建后端 (Go Gin)
         working-directory: ./smart_fox2
-        run: |
-          # 使用 CGO_ENABLED=0 进行静态编译，可以减少对系统库的依赖，使镜像更小、更具可移植性
-          CGO_ENABLED=0 GOOS=linux go build -v -o myapp .
+        env:
+          CGO_ENABLED: 0
+          GOOS: linux
+        run: go build -v -o myapp .
 
       - name: 设置Node.js环境
         uses: actions/setup-node@v4
