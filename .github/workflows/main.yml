@@ -23,6 +23,8 @@ jobs:
 
       - name: 下载后端依赖 (Go Modules)
         working-directory: ./smart_fox2 # 假设您的 go.mod 文件在 backend 目录下
+        env:
+          GOPROXY: https://goproxy.cn,direct
         run: go mod download
 
       - name: 构建后端 (Go Gin)
