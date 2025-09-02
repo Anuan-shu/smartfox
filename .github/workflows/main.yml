@@ -50,12 +50,15 @@ jobs:
           npm run build
 
       - name: 卸载现有应用
+        shell: bash
         run: |
           echo "卸载现有Todo应用..."
-          kubectl delete namespace todo-app --ignore-not-found=true -ErrorAction SilentlyContinue
+          # 现在，原始的 Bash 语法就可以完美工作了
+          kubectl delete namespace todo-app --ignore-not-found=true || true
           
           echo "等待命名空间删除完成..."
-          kubectl wait --for=delete namespace/todo-app --timeout=2m -ErrorAction SilentlyContinue
+          # 2>/dev/null 也可以正常使用
+          kubectl wait --for=delete namespace/todo-app --timeout=2m 2>/dev/null || true
           
           echo "卸载完成，开始重新部署..."
 
