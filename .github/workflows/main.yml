@@ -50,21 +50,38 @@ jobs:
           npm run build
 
       - name: 卸载现有应用
-        shell: bash
+
         run: |
           echo "卸载现有Todo应用..."
-          # 现在，原始的 Bash 语法就可以完美工作了
+   
+          # 删除前端服务
+          kubectl delete -f k8s/frontend-deployment.yaml --ignore-not-found=true || true
+          
+          # 删除后端服务
+          kubectl delete -f k8s/backend-deployment.yaml --ignore-not-found=true || true
+          # 删除judge
+          kubectl delete -f k8s/judge-deployment.yaml --ignore-not-found=true || true
+          
+          # 删除MySQL相关资源
+          kubectl delete -f k8s/mysql-deployment.yaml --ignore-not-found=true || true
+          
+          # 删除配置和密钥
+          kubectl delete -f k8s/mysql-pvc.yaml --ignore-not-found=true || true
+          kubectl delete -f k8s/mysql-secret.yaml --ignore-not-found=true || true
+          
+          # 删除命名空间（这会删除命名空间内的所有资源）
           kubectl delete namespace todo-app --ignore-not-found=true || true
           
-          echo "等待命名空间删除完成..."
-          # 2>/dev/null 也可以正常使用
-          kubectl wait --for=delete namespace/todo-app --timeout=2m 2>/dev/null || true
+          # 等待命名空间删除完成
+          kubectl wait --for=delete namespace/todo-app --timeout=300s 2>/dev/null || true
           
           echo "卸载完成，开始重新部署..."
 
       - name: 构建并推送Docker镜像
         run: |
-         
+          docker rmi todo-backend:latest
+          docker rmi todo-frontend:latest
+          docker rmi todo-judge:latest
           # 构建后端镜像
           # 注意：这里的 --load 是为了在 buildx 中直接将镜像加载到本地 docker images，如果您的 runner 环境不同，可能需要调整
           docker build -t todo-backend:latest -f smart_fox2/Dockerfile ./smart_fox2 --load
