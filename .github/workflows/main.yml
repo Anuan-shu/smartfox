@@ -18,7 +18,8 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
-
+      - name: Mark git directory as safe
+        run: git config --global --add safe.directory "${{ github.workspace }}"
       - name: 设置Go环境
         uses: actions/setup-go@v5
         with:
@@ -29,7 +30,7 @@ jobs:
         env:
           GOPROXY: https://goproxy.cn,direct
         run: go mod download
-
+    
       - name: 构建后端 (Go Gin)
         working-directory: ./smart_fox2
         env:
