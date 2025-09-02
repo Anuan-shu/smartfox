@@ -73,9 +73,6 @@ jobs:
           docker build -t todo-frontend:latest -f front/Dockerfile ./front --load
           docker build -t todo-judge:latest -f smart_fox2/Judger/Dockerfile ./smart_fox2/Judger --load
 
-          # (可选) 如果需要推送到远程仓库
-          # docker push your-repo/todo-backend:latest
-
           # 数据库镜像通常直接使用官方镜像，无需本地构建
 
       - name: 部署到Kubernetes
