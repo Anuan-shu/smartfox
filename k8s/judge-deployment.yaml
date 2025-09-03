@@ -1,32 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: judge-deployment
+  name: todo-judge
   namespace: todo-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: judge
+      app: todo-judge
   template:
     metadata:
       labels:
-        app: judge
+        app: todo-judge
     spec:
       containers:
-      - name: judge
-        image: anuanshu/smart-judge:latest # 使用本地构建的镜像
-        imagePullPolicy: Always # 优先使用本地镜像
+      - name: todo-judge
+        image: todo-judge:latest # 使用本地构建的镜像
+        imagePullPolicy: IfNotPresent # 优先使用本地镜像
         ports:
         - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: judge # 后端服务用来连接评测服务的内部 DNS 名称
+  name: todo-judge # 后端服务用来连接评测服务的内部 DNS 名称
+  namespace: todo-app
 spec:
   selector:
-    app: judge
+    app: todo-judge
   ports:
   - port: 8080
   type: ClusterIP

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: todo-backend
   namespace: todo-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: todo-backend
   template:
     metadata:
       labels:
-        app: backend
+        app: todo-backend
     spec:
       containers:
-      - name: backend
-        image: anuanshu/smart-backend:latest
-        imagePullPolicy: Always
+      - name: todo-backend
+        image: todo-backend:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3002
         env:
@@ -39,10 +39,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: todo-backend
+  namespace: todo-app
 spec:
   selector:
-    app: backend
+    app: todo-backend
   ports:
   - port: 3002
     targetPort: 3002
