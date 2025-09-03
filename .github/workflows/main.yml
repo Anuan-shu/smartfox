@@ -111,7 +111,7 @@ jobs:
 
           # 等待MySQL就绪
           echo "等待MySQL Pod就绪..."
-          kubectl wait --for=condition=ready pod -l app=todo-database -n todo-app --timeout=5m
+          kubectl wait --for=condition=ready pod -l app=mysql-db -n todo-app --timeout=5m
 
           # 部署后端 (Gin)
           kubectl apply -f k8s/backend-deployment.yaml
