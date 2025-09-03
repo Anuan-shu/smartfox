@@ -90,7 +90,14 @@ jobs:
           docker build -t todo-judge:latest -f smart_fox2/Judger/Dockerfile ./smart_fox2/Judger --load
 
           # 数据库镜像通常直接使用官方镜像，无需本地构建
-
+      - name: 设置 Kubernetes 上下文
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        run: |
+          # 将 Secret 中的 Kubeconfig 内容写入到一个临时文件中
+          # 并设置 KUBECONFIG 环境变量，让后续的 kubectl 命令使用这个文件
+          echo "$KUBE_CONFIG_DATA" > $Env:GITHUB_WORKSPACE/kubeconfig.yaml
+          echo "KUBECONFIG=$Env:GITHUB_WORKSPACE/kubeconfig.yaml" >> $Env:GITHUB_ENV
       - name: 部署到Kubernetes
         run: |
           # 创建命名空间
