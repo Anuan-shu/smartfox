@@ -82,9 +82,7 @@ jobs:
 
       - name: 构建并推送Docker镜像
         run: |
-          docker rmi todo-backend:latest
-          docker rmi todo-frontend:latest
-          docker rmi todo-judge:latest
+          
           # 构建后端镜像
           # 注意：这里的 --load 是为了在 buildx 中直接将镜像加载到本地 docker images，如果您的 runner 环境不同，可能需要调整
           docker build -t todo-backend:latest -f smart_fox2/Dockerfile ./smart_fox2 --load
