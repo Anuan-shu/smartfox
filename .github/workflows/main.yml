@@ -40,7 +40,7 @@ jobs:
           go test -v ./core
           go test -v ./middleware
           go test -v ./models
-          go test -v ./routes
+          go test -v ./routers
 
       - name: 设置Python环境
         uses: actions/setup-python@v5
