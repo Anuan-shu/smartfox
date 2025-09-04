@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// 创建临时配置文件用于测试
+// createTempConfigFile 函数在这个场景下可以不用了，但为了其他测试可能需要，先保留
 func createTempConfigFile(t *testing.T, content string) string {
 	tmpfile, err := ioutil.TempFile("", "test_config.*.yaml")
 	if err != nil {
@@ -34,8 +34,10 @@ func createTempConfigFile(t *testing.T, content string) string {
 }
 
 func TestInitConf(t *testing.T) {
-	// 创建临时配置文件
-	configContent := `
+	// 测试正常读取配置
+	t.Run("正常读取配置", func(t *testing.T) {
+		// 1. 定义测试所需的配置文件内容
+		configContent := `
 mysql:
   host: "localhost"
   port: 3306
@@ -44,38 +46,25 @@ mysql:
   password: "testpass"
   config: "charset=utf8mb4"
   log_level: "debug"
-
 logger:
   level: "info"
   prefix: "TEST"
   director: "./logs"
   show_Line: true
   log_In_Console: true
-
 system:
   host: "0.0.0.0"
   port: 8080
   env: "test"
 `
+		// 2. 直接在当前目录（执行测试时的 core/ 目录）创建 settings.yaml
+		err := ioutil.WriteFile("settings.yaml", []byte(configContent), 0644)
+		if err != nil {
+			t.Fatalf("创建 settings.yaml 失败: %v", err)
+		}
+		// 3. 使用 defer 确保测试结束后文件一定会被删除，即使测试失败或 panic
+		defer os.Remove("settings.yaml")
 
-	configFile := createTempConfigFile(t, configContent)
-	defer os.Remove(configFile) // 测试完成后删除临时文件
-
-	// 备份原始配置文件和全局配置
-	originalConfigFile := ""
-	if _, err := os.Stat("settings.yaml"); err == nil {
-		// 如果存在原始配置文件，备份它
-		originalConfigFile = "settings.yaml.backup"
-		os.Rename("settings.yaml", originalConfigFile)
-		defer os.Rename(originalConfigFile, "settings.yaml") // 测试完成后恢复
-	}
-
-	// 将临时配置文件重命名为 settings.yaml
-	os.Rename(configFile, "settings.yaml")
-	defer os.Remove("settings.yaml") // 测试完成后删除
-
-	// 测试正常读取配置
-	t.Run("正常读取配置", func(t *testing.T) {
 		// 确保全局配置为空
 		global.Config = nil
 
@@ -84,6 +73,7 @@ system:
 		_, w, _ := os.Pipe()
 		os.Stdout = w
 
+		// 4. 现在可以安全地调用 InitConf，它会找到我们刚刚创建的文件
 		InitConf()
 
 		w.Close()
@@ -99,12 +89,9 @@ system:
 
 	// 测试配置文件不存在的情况
 	t.Run("配置文件不存在", func(t *testing.T) {
-		// 确保没有配置文件
-		if _, err := os.Stat("settings.yaml"); err == nil {
-			os.Remove("settings.yaml")
-		}
+		// 为了确保文件不存在，我们先尝试删除一下（即使它不存在也没关系）
+		os.Remove("settings.yaml")
 
-		// 测试会panic，使用defer恢复
 		defer func() {
 			if r := recover(); r == nil {
 				t.Errorf("InitConf应该panic但没有panic")
@@ -116,21 +103,19 @@ system:
 
 	// 测试无效的YAML配置
 	t.Run("无效的YAML配置", func(t *testing.T) {
-		// 创建无效的配置文件
+		// 创建无效的配置文件内容
 		invalidContent := `
 mysql:
   host: "localhost"
   port: "invalid_port"  # 端口应该是数字，这里是字符串
 `
-
-		invalidFile := createTempConfigFile(t, invalidContent)
-		defer os.Remove(invalidFile)
-
-		// 将无效配置文件重命名为 settings.yaml
-		os.Rename(invalidFile, "settings.yaml")
+		// 同样，直接创建这个无效文件
+		err := ioutil.WriteFile("settings.yaml", []byte(invalidContent), 0644)
+		if err != nil {
+			t.Fatalf("创建无效的 settings.yaml 失败: %v", err)
+		}
 		defer os.Remove("settings.yaml")
 
-		// 测试会panic，使用defer恢复
 		defer func() {
 			if r := recover(); r == nil {
 				t.Errorf("InitConf应该panic但没有panic")

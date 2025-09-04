@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
+import React from 'react';
 
 export default function LoginPage() {
   const [credentials, setCredentials] = useState({ name: '', password: '' });

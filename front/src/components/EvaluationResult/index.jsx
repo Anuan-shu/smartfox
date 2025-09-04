@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './EvaluationResult.module.css';
-
+import React from "react";
 export default function EvaluationResult({ result }) {
   if (!result) return null;
 

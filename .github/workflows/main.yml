@@ -30,7 +30,11 @@ jobs:
         env:
           GOPROXY: https://goproxy.cn,direct
         run: go mod download
-    
+
+      - name: 运行后端单元测试 (Go)
+        working-directory: ./smart_fox2
+        run: go test -v ./...
+
       - name: 构建后端 (Go Gin)
         working-directory: ./smart_fox2
         env:
@@ -45,12 +49,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: front/package-lock.json
       
-      - name: 安装并构建前端
+      - name: 安装测试并构建前端
         working-directory: ./front
         env:
           CI: false
         run: |
           npm ci
+          npm run test
           npm run build
 
       - name: 卸载现有应用

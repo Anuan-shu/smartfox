@@ -26,11 +26,11 @@
     "start": "webpack serve --config ./webpack.config.js --mode development",
     "test:cypress": "cypress open",
     "build": "react-scripts build",
-    "test": "mocha test/**/*.test.js --require src/test/setup.js --timeout 10000",
     "test:watch": "mocha test/**/*.test.js --require src/test/setup.js --watch --timeout 10000",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +55,14 @@
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [
       "<rootDir>/src/setupTests.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json",
+      "node"
     ],
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"

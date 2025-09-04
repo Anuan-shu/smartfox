@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './RegisterPage.module.css';
+import React from 'react';
 
 export default function RegisterPage() {
   const navigate = useNavigate();

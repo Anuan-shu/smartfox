@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Form, Input, Button, Upload, Avatar, message, Divider } from 'antd';
 import { UserOutlined, UploadOutlined } from '@ant-design/icons';
 import axios from '../../utils/axios';

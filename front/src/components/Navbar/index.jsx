@@ -4,6 +4,7 @@ import { Menu, Avatar, Dropdown, Button } from 'antd';
 import { UserOutlined, LogoutOutlined, HistoryOutlined, SettingOutlined, BellOutlined } from '@ant-design/icons';
 import { logout } from '../../utils/auth';
 import styles from './Navbar.module.css';
+import React from "react";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
