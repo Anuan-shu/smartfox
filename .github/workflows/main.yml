@@ -33,7 +33,29 @@ jobs:
 
       - name: 运行后端单元测试 (Go)
         working-directory: ./smart_fox2
-        run: go test -v ./...
+        run: |
+          go test -v ./common
+          go test -v ./config
+          go test -v ./controller
+          go test -v ./core
+          go test -v ./middleware
+          go test -v ./models
+          go test -v ./routes
+
+      - name: 设置Python环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' # 或者您项目使用的Python版本
+
+      - name: 安装Python依赖
+        working-directory: ./smart_fox2/Judger
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 运行Python单元测试 (unittest)
+        working-directory: ./smart_fox2/Judger
+        run: python -m unittest discover
 
       - name: 构建后端 (Go Gin)
         working-directory: ./smart_fox2
